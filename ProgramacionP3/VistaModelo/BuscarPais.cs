@@ -65,32 +65,37 @@ namespace ProgramacionP3.VistaModelo
             {
                 var client = new HttpClient();
                 var response = await client.GetStringAsync($"https://restcountries.com/v3.1/name/{NombrePais}?fields=name,region,maps");
-                var pais = JsonConvert.DeserializeObject<List<Pais>>(response).FirstOrDefault();
-                if (pais != null)
+                var paises = JsonConvert.DeserializeObject<List<Pais>>(response);
+                if (paises != null && paises.Count > 0)
                 {
-                    ResultadoBusqueda = $"Nombre: {pais.Name.Common}, Región: {pais.Region}, Link: {pais.Maps.GoogleMaps}";
-
-                    var nuevoPais = new PaisDB
+                    foreach (var pais in paises)
                     {
-                        Nombre = pais.Name.Common,
-                        Region = pais.Region,
-                        LinkGoogleMaps = pais.Maps.GoogleMaps,
-                        NombreBD = "JOlalla"
-                    };
-                    _db.Insert(nuevoPais);
-                    PaisesConsultados.Add(nuevoPais);
+                        var nuevoPais = new PaisDB
+                        {
+                            Nombre = pais.Name.Common,
+                            Region = pais.Region,
+                            LinkGoogleMaps = pais.Maps.GoogleMaps,
+                            NombreBD = "JOlalla"
+                        };
+                        _db.Insert(nuevoPais);
+                        PaisesConsultados.Add(nuevoPais);
+                    }
+                    ResultadoBusqueda = $"Se encontraron {paises.Count} países. El primero es: Nombre: {paises.First().Name.Common}, Región: {paises.First().Region}, Link: {paises.First().Maps.GoogleMaps}";
                 }
                 else
                 {
                     ResultadoBusqueda = "País no encontrado.";
                 }
             }
+            catch (HttpRequestException httpEx)
+            {
+                ResultadoBusqueda = $"Error de solicitud HTTP: {httpEx.Message}";
+            }
             catch (Exception ex)
             {
                 ResultadoBusqueda = $"Error: {ex.Message}";
             }
         }
-
 
         private void OnLimpiarClicked()
         {
