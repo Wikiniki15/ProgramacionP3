@@ -6,8 +6,16 @@ using System.Threading.Tasks;
 
 namespace ProgramacionP3.Modelo
 {
-    internal class Pais
+    public class Pais
     {
-
+        public string Nombre { get; set; }
+        public string Region { get; set; }
+        public string LinkGoogleMaps { get; set; }
     }
+
+    public class PaisDB : Pais
+    {
+        public string NombreBD { get; set; }
+    }
+
 }
