@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:ProgramacionP3"
              xmlns:vm="clr-namespace:ProgramacionP3.VistaModelo"
              x:Class="ProgramacionP3.Vista.BuscarPaisVista"
              Title="JOBuscarPaisVista">
     
     <ContentPage.BindingContext>
-        <vm:BuscarPais />
+        <Binding Source="{x:Static local:App.BuscarPaisViewModel}" />
     </ContentPage.BindingContext>
     
     <VerticalStackLayout>
