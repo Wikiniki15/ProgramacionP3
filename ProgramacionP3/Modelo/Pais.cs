@@ -8,5 +8,6 @@ namespace ProgramacionP3.Modelo
 {
     internal class Pais
     {
+
     }
 }
