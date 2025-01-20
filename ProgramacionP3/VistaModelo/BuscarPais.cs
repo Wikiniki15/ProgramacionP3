@@ -91,6 +91,7 @@ namespace ProgramacionP3.VistaModelo
             }
         }
 
+
         private void OnLimpiarClicked()
         {
             NombrePais = string.Empty;
