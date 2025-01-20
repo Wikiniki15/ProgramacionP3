@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:ProgramacionP3.VistaModelo"
+             x:Class="ProgramacionP3.Vista.BuscarPaisVista"
+             Title="JOBuscarPaisVista">
+    
+    <ContentPage.BindingContext>
+        <vm:BuscarPais />
+    </ContentPage.BindingContext>
+    
+    <VerticalStackLayout>
+        <Entry x:Name="jolalla_txtBusqueda" 
+               Text="{Binding NombrePais}" 
+               Placeholder="Ingrese nombre del país" />
+        
+        <Button x:Name="jolalla_btnBuscar" 
+                Text="Buscar" 
+                Command="{Binding BuscarCommand}" />
+        
+        <Button x:Name="jolalla_btnLimpiar" 
+                Text="Limpiar" Command="{Binding LimpiarCommand}" />
+        
+        <Label x:Name="jolalla_lblResultado" 
+               Text="{Binding ResultadoBusqueda}" />
+        
+    </VerticalStackLayout>
+</ContentPage>

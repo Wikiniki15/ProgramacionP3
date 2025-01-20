@@ -1,11 +1,13 @@
-﻿using SQLite;
-using Newtonsoft.Json;
-using System.Net.Http;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
+using System.Net.Http;
 using System.Windows.Input;
 using ProgramacionP3.Modelo;
+using Newtonsoft.Json;
+using SQLite;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace ProgramacionP3.VistaModelo
 {
@@ -43,16 +45,16 @@ namespace ProgramacionP3.VistaModelo
 
         public BuscarPais()
         {
-            _db = new SQLiteConnection(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "scordova_db.sqlite"));
+            _db = new SQLiteConnection(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "jolalla_db.sqlite"));
             _db.CreateTable<PaisDB>();
             PaisesConsultados = new ObservableCollection<PaisDB>(_db.Table<PaisDB>().ToList());
-            BuscarCommand = new Command(OnBuscarClicked);
+            BuscarCommand = new Command(async () => await OnBuscarClicked());
             LimpiarCommand = new Command(OnLimpiarClicked);
         }
 
         protected void OnPropertyChanged(string propertyName) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
-        private async void OnBuscarClicked()
+        private async Task OnBuscarClicked()
         {
             if (string.IsNullOrEmpty(NombrePais))
             {
@@ -66,14 +68,14 @@ namespace ProgramacionP3.VistaModelo
                 var pais = JsonConvert.DeserializeObject<List<Pais>>(response).FirstOrDefault();
                 if (pais != null)
                 {
-                    ResultadoBusqueda = $"Nombre: {pais.Nombre}, Región: {pais.Region}, Link: {pais.LinkGoogleMaps}";
+                    ResultadoBusqueda = $"Nombre: {pais.Name.Common}, Región: {pais.Region}, Link: {pais.Maps.GoogleMaps}";
 
                     var nuevoPais = new PaisDB
                     {
-                        Nombre = pais.Nombre,
+                        Nombre = pais.Name.Common,
                         Region = pais.Region,
-                        LinkGoogleMaps = pais.LinkGoogleMaps,
-                        NombreBD = "SCordova"
+                        LinkGoogleMaps = pais.Maps.GoogleMaps,
+                        NombreBD = "JOlalla"
                     };
                     _db.Insert(nuevoPais);
                     PaisesConsultados.Add(nuevoPais);
@@ -95,5 +97,4 @@ namespace ProgramacionP3.VistaModelo
             ResultadoBusqueda = string.Empty;
         }
     }
-
 }
