@@ -45,6 +45,7 @@ namespace ProgramacionP3.VistaModelo
 
         public BuscarPais()
         {
+
             _db = new SQLiteConnection(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "jolalla_db.sqlite"));
             _db.CreateTable<PaisDB>();
             PaisesConsultados = new ObservableCollection<PaisDB>(_db.Table<PaisDB>().ToList());

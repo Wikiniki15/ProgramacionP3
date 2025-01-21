@@ -15,6 +15,6 @@ namespace ProgramacionP3.Modelo
         public string Region { get; set; } 
         public string LinkGoogleMaps { get; set; } 
         public string NombreBD { get; set; } 
-        public string Display => $"Nombre País: {Nombre}, Región: {Region}, Link: {LinkGoogleMaps}, NombreBD: {NombreBD}"; 
+        public string Display => $"Nombre del País: {Nombre}, Región: {Region}, Link: {LinkGoogleMaps}, NombreBD: {NombreBD}"; 
     }
 }

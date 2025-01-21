@@ -4,22 +4,25 @@
              xmlns:local="clr-namespace:ProgramacionP3"
              xmlns:vm="clr-namespace:ProgramacionP3.VistaModelo"
              x:Class="ProgramacionP3.Vista.PaisesConsultados"
-             Title="JOPaisesConsultados">
+             Title="Jessica Olalla">
 
     <ContentPage.BindingContext>
         <Binding Source="{x:Static local:App.BuscarPaisViewModel}" />
     </ContentPage.BindingContext>
     
     <StackLayout>
-        <Label x:Name="jolalla_lblPaisesConsultados"
-            Text="Países Consultados" />
-
         <ListView x:Name="jolalla_lstPaises" 
                   ItemsSource="{Binding PaisesConsultados}">
-            
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextCell Text="{Binding Display}" />
+                    <ViewCell>
+                        <StackLayout Padding="10">
+                            <Label Text="{Binding Display}" 
+                                   FontSize="15" 
+                                   FontFamily="Helvetica"
+                                   x:Name="jolalla_lblpais"/>
+                        </StackLayout>
+                    </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
             

@@ -4,7 +4,7 @@
              xmlns:local="clr-namespace:ProgramacionP3"
              xmlns:vm="clr-namespace:ProgramacionP3.VistaModelo"
              x:Class="ProgramacionP3.Vista.BuscarPaisVista"
-             Title="JOBuscarPaisVista">
+             Title="Jessica Olalla">
     
     <ContentPage.BindingContext>
         <Binding Source="{x:Static local:App.BuscarPaisViewModel}" />
